@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI OMID | هوش مصنوعی و توسعه آینده</title>
+  <meta name="description" content="AI OMID - پلتفرم هوشمند توسعه ایده‌ها و فناوری‌های آینده در حوزه هوش مصنوعی، بلاکچین و تحلیل مالی." />
+  <style>
+    :root {
+      --bg: #f4f8ff;
+      --bg-soft: #eef5ff;
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --secondary: #0f172a;
+      --secondary-soft: #1e293b;
+      --text: #0f172a;
+      --muted: #64748b;
+      --line: #dfeafc;
+      --white: #ffffff;
+      --success: #10b981;
+      --shadow: 0 20px 40px rgba(37, 99, 235, 0.12);
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(180deg, #f8fbff 0%, #edf5ff 100%);
+      color: var(--text);
+      line-height: 1.7;
+      direction: rtl;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(15, 23, 42, 0.82);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 76px;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--white);
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-badge {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--primary), #5aa3ff);
+      display: grid;
+      place-items: center;
+      box-shadow: 0 12px 25px rgba(37,99,235,0.45);
+      font-size: 1.1rem;
+      font-weight: 800;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      color: rgba(255,255,255,0.8);
+      font-size: 0.96rem;
+    }
+
+    .nav-menu a {
+      transition: 0.25s ease;
+    }
+
+    .nav-menu a:hover {
+      color: var(--white);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border-radius: 999px;
+      padding: 14px 24px;
+      font-weight: 700;
+      transition: 0.25s ease;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), #4f9dff);
+      color: var(--white);
+      box-shadow: 0 16px 30px rgba(37, 99, 235, 0.28);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 22px 35px rgba(37, 99, 235, 0.38);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.06);
+      color: var(--white);
+      border-color: rgba(255,255,255,0.15);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.12);
+    }
+
+    .hero {
+      background:
+        radial-gradient(circle at top left, rgba(90, 163, 255, 0.2), transparent 30%),
+        linear-gradient(135deg, #0b1220 0%, #111827 40%, #0f172a 100%);
+      color: var(--white);
+      padding: 100px 0 90px;
+      overflow: hidden;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.04);
+      color: #dbeafe;
+      font-size: 0.85rem;
+      margin-bottom: 22px;
+    }
+
+    .eyebrow-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 15px rgba(16,185,129,0.9);
+    }
+
+    h1 {
+      font-size: clamp(2.6rem, 4vw, 5rem);
+      line-height: 1.12;
+      font-weight: 900;
+      letter-spacing: -0.05em;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 .highlight {
+      background: linear-gradient(135deg, #60a5fa 0%, #dfeeff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+
+    .hero-copy {
+      font-size: 1.08rem;
+      max-width: 620px;
+      color: rgba(255,255,255,0.74);
+      margin-bottom: 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 34px;
+    }
+
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+      color: rgba(255,255,255,0.72);
+      font-size: 0.92rem;
+    }
+
+    .meta-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .meta-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: rgba(148, 163, 184, 0.15);
+      border: 1px solid rgba(255,255,255,0.12);
+      font-size: 0.9rem;
+    }
+
+    .hero-panel {
+      position: relative;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 32px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .panel-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      padding: 22px;
+    }
+
+    .mini-label {
+      font-size: 0.78rem;
+      color: #cbd5e1;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .dashboard-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .dashboard-row:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .token {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--white);
+    }
+
+    .trend {
+      color: var(--success);
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .panel-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(140px,1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .stat-box {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .stat-name {
+      font-size: 0.8rem;
+      color: #cbd5e1;
+    }
+
+    .section {
+      padding: 110px 0;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+
+    .section-tag {
+      color: var(--primary);
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      display: inline-block;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 3vw, 3rem);
+      line-height: 1.2;
+      font-weight: 900;
+      color: var(--secondary);
+      letter-spacing: -0.04em;
+    }
+
+    .section-desc {
+      color: var(--muted);
+      max-width: 580px;
+      font-size: 1.04rem;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .stat-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 12px 24px rgba(15, 23, 42, 0.04);
+      padding: 28px 22px;
+      transition: 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+
+    .stat-card .number {
+      font-size: 2.2rem;
+      font-weight: 900;
+      letter-spacing: -0.06em;
+      color: var(--secondary);
+      margin-bottom: 10px;
+    }
+
+    .stat-card .label {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .about-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.04);
+    }
+
+    .about-card p {
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .check-list {
+      list-style: none;
+      display: grid;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .check-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .check {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+      color: #065f46;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      font-size: 0.9rem;
+    }
+
+    .feature-visual {
+      min-height: 420px;
+      padding: 18px;
+      border-radius: 30px;
+      background: linear-gradient(180deg, #f5f9ff, #eaf3ff);
+      border: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .visual-box {
+      background: linear-gradient(135deg, #ffffff, #edf5ff);
+      border: 1px solid rgba(37,99,235,0.10);
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: 0 18px 30px rgba(37, 99, 235, 0.08);
+    }
+
+    .visual-bar {
+      height: 14px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #dfeeff, #eff6ff, #dfeeff);
+      margin-bottom: 18px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .visual-bar::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      width: 72%;
+      background: linear-gradient(90deg, var(--primary), #5aa3ff);
+      border-radius: inherit;
+      box-shadow: 0 8px 20px rgba(37,99,235,0.25);
+    }
+
+    .cards-mini {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(120px, 1fr));
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .mini-card {
+      background: var(--white);
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      padding: 18px 14px;
+      text-align: center;
+    }
+
+    .mini-card strong {
+      display: block;
+      font-size: 1.35rem;
+      margin-bottom: 6px;
+      color: var(--secondary);
+    }
+
+    .mini-card span {
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(260px,1fr));
+      gap: 22px;
+      margin-top: 26px;
+    }
+
+    .service-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 28px 22px;
+      box-shadow: 0 14px 26px rgba(15,23,42,0.03);
+      transition: 0.35s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow);
+    }
+
+    .icon-wrap {
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(37,99,235,0.12), rgba(90,163,255,0.2));
+      display: grid;
+      place-items: center;
+      font-size: 1.6rem;
+      margin-bottom: 18px;
+    }
+
+    .service-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: var(--secondary);
+    }
+
+    .service-card p {
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(220px, 1fr));
+      gap: 22px;
+      margin-top: 30px;
+    }
+
+    .benefit-card {
+      background: linear-gradient(180deg, #ffffff 0%, #f9fbff 100%);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 24px 18px;
+      text-align: center;
+      box-shadow: 0 12px 24px rgba(15, 23, 42, 0.03);
+    }
+
+    .benefit-icon {
+      width: 62px;
+      height: 62px;
+      border-radius: 18px;
+      margin: 0 auto 16px;
+      display: grid;
+      place-items: center;
+      font-size: 1.5rem;
+      background: linear-gradient(135deg, rgba(37,99,235,0.12), rgba(90,163,255,0.18));
+    }
+
+    .benefit-card h4 {
+      margin-bottom: 8px;
+      font-size: 1.15rem;
+      color: var(--secondary);
+    }
+
+    .benefit-card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .cta {
+      background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-soft) 100%);
+      color: var(--white);
+      border-radius: 34px;
+      padding: 54px 42px;
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+      box-shadow: 0 28px 50px rgba(15,23,42,0.18);
+    }
+
+    .cta h3 {
+      font-size: clamp(1.9rem, 2.4vw, 2.8rem);
+      line-height: 1.2;
+      margin-bottom: 10px;
+      letter-spacing: -0.04em;
+    }
+
+    .cta p {
+      color: rgba(255,255,255,0.74);
+      max-width: 640px;
+    }
+
+    .contact-shell {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+      margin-top: 26px;
+    }
+
+    .contact-card,
+    .contact-form {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      padding: 30px;
+      box-shadow: 0 14px 28px rgba(15,23,42,0.04);
+    }
+
+    .contact-card p {
+      color: var(--muted);
+      margin-top: 10px;
+    }
+
+    .contact-items {
+      display: grid;
+      gap: 18px;
+      margin-top: 26px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: #f8fbff;
+      border: 1px solid var(--line);
+    }
+
+    .contact-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(37,99,235,0.12), rgba(90,163,255,0.2));
+      display: grid;
+      place-items: center;
+      font-size: 1.1rem;
+      color: var(--primary-dark);
+    }
+
+    .contact-form form {
+      display: grid;
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    input, textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px 18px;
+      font-size: 1rem;
+      resize: vertical;
+      background: #fbfdff;
+      color: var(--text);
+      font-family: inherit;
+      transition: 0.2s ease;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: rgba(37,99,235,0.45);
+      box-shadow: 0 0 0 4px rgba(37,99,235,0.08);
+    }
+
+    .btn-block {
+      width: 100%;
+    }
+
+    footer {
+      background: #0b1220;
+      color: rgba(255,255,255,0.72);
+      padding: 28px 0 36px;
+      margin-top: 100px;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 1000px) {
+      .hero-inner,
+      .about-grid,
+      .contact-shell,
+      .section-head,
+      .cta {
+        grid-template-columns: 1fr;
+        display: grid;
+      }
+
+      .section-head {
+        align-items: start;
+      }
+
+      .cta {
+        padding: 38px 28px;
+      }
+
+      .services-grid,
+      .stats-grid,
+      .benefits-grid {
+        grid-template-columns: repeat(2, minmax(220px, 1fr));
+      }
+    }
+
+    @media (max-width: 760px) {
+      .nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 14px 0;
+      }
+
+      .nav-menu {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 14px 18px;
+      }
+
+      .hero {
+        padding-top: 80px;
+      }
+
+      .hero-meta {
+        gap: 12px;
+      }
+
+      .services-grid,
+      .stats-grid,
+      .benefits-grid,
+      .field-row {
+        grid-template-columns: 1fr;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .hero-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="container nav">
+      <div class="brand">
+        <div class="brand-badge">AI</div>
+        <span>AI OMID</span>
+      </div>
+
+      <nav class="nav-menu" aria-label="منوی اصلی">
+        <a href="#about">درباره ما</a>
+        <a href="#services">خدمات</a>
+        <a href="#benefits">مزایا</a>
+        <a href="#contact">تماس</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="#contact" class="btn btn-secondary">در تماس باشیم</a>
+        <a href="#services" class="btn btn-primary">مشاهده خدمات</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-inner">
+        <div>
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            آینده را با هوش مصنوعی بسازید
+          </div>
+
+          <h1>
+            ایده‌ها را به <span class="highlight">راه‌حل‌های هوشمند</span> تبدیل می‌کنیم
+          </h1>
+
+          <p class="hero-copy">
+            ما در AI OMID به طراحی و پیاده‌سازی ابزارهای نوآورانه، تحلیل‌های مالی هوشمند، راهکارهای مبتنی بر AI و توسعه محصولات آینده‌محور می‌پردازیم.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-primary">شروع همکاری</a>
+            <a href="#about" class="btn btn-secondary">درباره پروژه</a>
+          </div>
+
+          <div class="hero-meta">
+            <div class="meta-item">
+              <span class="meta-icon">⚡</span>
+              <span>راه‌حل‌های سریع و قابل اجرا</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-icon">🔐</span>
+              <span>امنیت و دقت بالا</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-panel">
+          <div class="panel-card">
+            <span class="mini-label">نمای کلی عملکرد</span>
+
+            <div class="dashboard-row">
+              <div>
+                <div class="mini-label">دارایی دیجیتال</div>
+                <div class="token">12.4K</div>
+              </div>
+              <div class="trend">+18.6%</div>
+            </div>
+
+            <div class="dashboard-row">
+              <div>
+                <div class="mini-label">تحلیل بازار</div>
+                <div class="token">89%</div>
+              </div>
+              <div class="trend">پیش‌بینی دقیق</div>
+            </div>
+
+            <div class="panel-grid">
+              <div class="stat-box">
+                <div class="stat-value">240+</div>
+                <div class="stat-name">پروژه موفق</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-value">36</div>
+                <div class="stat-name">تجربه ماهانه</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-value">4.9/5</div>
+                <div class="stat-name">رضایت مشتری</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-value">24/7</div>
+                <div class="stat-name">پشتیبانی</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="section-tag">آمار و عملکرد</span>
+            <h2>در مسیر رشد و نوآوری</h2>
+          </div>
+          <p class="section-desc">
+            ما با تمرکز بر داده، تحلیل و تجربه کاربری، راهکارهایی می‌سازیم که هم از نظر فنی قوی هستند و هم از نظر تجاری قابل‌استفاده.
+  
